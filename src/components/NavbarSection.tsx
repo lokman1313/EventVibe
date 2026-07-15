@@ -13,7 +13,8 @@ export default function NavbarSection() {
 
   // রোলের উপর ভিত্তি করে নেভিগেশন ডিফাইন করা
   const getNavItems = () => {
-    if (!user) {
+    // ইউজার লগইন না থাকলে বা রোল না থাকলে ডিফল্ট মেনু
+    if (!user || !user.role) {
       return [
         { label: "Home", href: "/" },
         { label: "Browse Events", href: "/events" },
@@ -21,23 +22,37 @@ export default function NavbarSection() {
       ];
     }
 
-    if (user.role === "admin") {
+    const role = user.role.toLowerCase();
+
+    if (role === "admin") {
       return [
-        { label: "Events", href: "/admin/events" },
-        { label: "Create Event", href: "/admin/create" },
-        { label: "Users", href: "/admin/users" },
-        { label: "Analytics", href: "/admin/analytics" },
+        { label: "Home", href: "/" },
+        { label: "Browse Events", href: "/events" },
+        { label: "Create Event", href: "/create-event" },
+        { label: "Users", href: "/all-users" },
+        { label: "Analytics", href: "/analytics" },
       ];
     }
 
+    if (role === "client" || role === "user") {
+      return [
+        { label: "Home", href: "/" },
+        { label: "Browse Events", href: "/events" },
+        { label: "About Us", href: "/about" },
+        { label: "My Bookings", href: "/bookings" },
+        { label: "Profile", href: "/profile" },
+      ];
+    }
+
+    // অন্য যেকোনো রোলের জন্য সেফটি ফলব্যাক
     return [
       { label: "Home", href: "/" },
-      { label: "My Bookings", href: "/bookings" },
-      { label: "Profile", href: "/profile" },
+      { label: "Browse Events", href: "/events" },
     ];
   };
 
-  const navItems = getNavItems();
+  // navItems ডিফাইন করার সময় নিশ্চিত হওয়া যাতে এটি কখনো undefined না হয়
+  const navItems = getNavItems() || [];
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-gray-200/80 dark:border-white/10 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md transition-colors duration-300">
@@ -58,7 +73,7 @@ export default function NavbarSection() {
                 <li key={item.label}>
                   <NextLink
                     href={item.href}
-                    className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors"
+                    className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-violet-500 dark:hover:text-violet-400 transition-colors"
                   >
                     {item.label}
                   </NextLink>
@@ -85,11 +100,11 @@ export default function NavbarSection() {
               </Button>
             ) : (
               <div className="flex items-center gap-4">
-                <NextLink href="/signin" className="text-sm font-medium text-violet-600 dark:text-violet-500 dark:text-violet-400 transition-colors">
+                <NextLink href="/login" className="text-sm font-medium text-violet-600 dark:text-violet-500 transition-colors">
                   Sign In
                 </NextLink>
                 <NextLink href="/signup">
-                  <Button className="bg-violet-500 hover:bg-violet-600 dark:bg-violet-600 dark:hover:bg-violet-700 text-white font-medium shadow-md shadow-cyan-500/10">
+                  <Button className="bg-violet-500 hover:bg-violet-600 dark:bg-violet-600 dark:hover:bg-violet-700 text-white font-medium shadow-md shadow-violet-500/10">
                     Get Started
                   </Button>
                 </NextLink>
@@ -119,7 +134,7 @@ export default function NavbarSection() {
         {/* মোবাইল ড্রপডাউন মেনু */}
         <div
           className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-            isMenuOpen ? "max-h-screen border-t border-gray-100 dark:border-white/5 py-4 invisible-scrollbar" : "max-h-0"
+            isMenuOpen ? "max-h-screen border-t border-gray-100 dark:border-white/5 py-4" : "max-h-0"
           }`}
         >
           <div className="flex flex-col gap-2 px-2 pb-2">
@@ -145,11 +160,11 @@ export default function NavbarSection() {
                 </Button>
               ) : (
                 <div className="flex flex-col gap-3">
-                  <NextLink href="/signin" onClick={() => setIsMenuOpen(false)} className="text-center font-medium text-violet-600 dark:text-violet-500 dark:text-violet-400  py-2.5 rounded-lg border border-gray-200 dark:border-zinc-800">
+                  <NextLink href="/login" onClick={() => setIsMenuOpen(false)} className="text-center font-medium text-violet-600 dark:text-violet-400 py-2.5 rounded-lg border border-gray-200 dark:border-zinc-800">
                     Sign In
                   </NextLink>
                   <NextLink href="/signup" onClick={() => setIsMenuOpen(false)}>
-                    <Button className="w-full bg-violet-600 dark:bg-violet-600 text-white font-medium py-6 shadow-sm">
+                    <Button className="w-full bg-violet-600 text-white font-medium py-6 shadow-sm">
                       Get Started
                     </Button>
                   </NextLink>

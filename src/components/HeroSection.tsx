@@ -5,6 +5,7 @@ import { Button } from "@heroui/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaArrowRight, FaChevronDown, FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
 import NextLink from "next/link";
+import Link from "next/link";
 
 // স্লাইডারের জন্য ডেমো ইভেন্ট ডেটা (EventVibe থিমের সাথে সামঞ্জস্যপূর্ণ)
 const featuredEvents = [
@@ -99,23 +100,23 @@ export default function HeroSection() {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4"
             >
-              <Button 
-                as={NextLink}
+              <Link 
+                
                 href="/events"
-                endContent={<FaArrowRight />}
-                className="bg-violet-600 hover:bg-violet-700 dark:bg-violet-600 dark:hover:bg-violet-700 text-white font-semibold py-6 px-8 rounded-xl shadow-lg shadow-violet-500/20 w-full sm:w-auto"
+                
+                className="bg-violet-600 hover:bg-violet-700 dark:bg-violet-600 dark:hover:bg-violet-700 text-white font-semibold py-4 px-6 rounded-xl shadow-lg shadow-violet-500/20 w-full sm:w-auto flex justify-center items-center gap-2"
               >
-                Explore Events
-              </Button>
+                Explore Events <FaArrowRight />
+              </Link>
               
-              <Button 
-                as={NextLink}
+              <Link 
+                
                 href="/about"
-                variant="bordered"
-                className="border-gray-200 dark:border-zinc-800 text-gray-700 dark:text-gray-300 font-semibold py-6 px-8 rounded-xl w-full sm:w-auto hover:bg-gray-50 dark:hover:bg-zinc-900"
+                
+                className="border-gray-200 dark:border-zinc-800 text-gray-700 dark:text-gray-300 font-semibold py-4 px-6 rounded-xl w-full sm:w-auto hover:bg-gray-50 dark:hover:bg-zinc-900"
               >
                 About US
-              </Button>
+              </Link>
             </motion.div>
           </div>
 
