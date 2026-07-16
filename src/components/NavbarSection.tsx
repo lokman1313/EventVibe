@@ -2,17 +2,24 @@
 
 import { useState } from "react";
 import NextLink from "next/link";
+import { usePathname } from "next/navigation";
 import { Button } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
 import { ThemeSwitch } from "./ThemeSwitch";
 
+interface NavItem {
+  label: string;
+  href: string;
+}
+
 export default function NavbarSection() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
   const { data: session } = authClient.useSession();
   const user = session?.user;
 
   // রোলের উপর ভিত্তি করে নেভিগেশন ডিফাইন করা
-  const getNavItems = () => {
+  const getNavItems = (): NavItem[] => {
     // ইউজার লগইন না থাকলে বা রোল না থাকলে ডিফল্ট মেনু
     if (!user || !user.role) {
       return [
@@ -27,10 +34,11 @@ export default function NavbarSection() {
     if (role === "admin") {
       return [
         { label: "Home", href: "/" },
-        { label: "Browse Events", href: "/events" },
-        { label: "Create Event", href: "/create-event" },
-        { label: "Users", href: "/all-users" },
-        { label: "Analytics", href: "/analytics" },
+        { label: "Manage Events", href: "/admin/events" },
+        { label: "Create Event", href: "/admin/create-event" },
+        { label: "Users", href: "/admin/all-users" },
+        { label: "Analytics", href: "/admin/analytics" },
+        { label: "Profile", href: "/profile" },
       ];
     }
 
@@ -39,7 +47,7 @@ export default function NavbarSection() {
         { label: "Home", href: "/" },
         { label: "Browse Events", href: "/events" },
         { label: "About Us", href: "/about" },
-        { label: "My Bookings", href: "/bookings" },
+        { label: "My Bookings", href: "/clients/bookings" },
         { label: "Profile", href: "/profile" },
       ];
     }
@@ -51,8 +59,15 @@ export default function NavbarSection() {
     ];
   };
 
-  // navItems ডিফাইন করার সময় নিশ্চিত হওয়া যাতে এটি কখনো undefined না হয়
   const navItems = getNavItems() || [];
+
+  // অ্যাক্টিভ রাউট চেক করার হেল্পার ফাংশন
+  const isActive = (href: string) => {
+    if (href === "/") {
+      return pathname === "/";
+    }
+    return pathname.startsWith(href);
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-gray-200/80 dark:border-white/10 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md transition-colors duration-300">
@@ -69,16 +84,23 @@ export default function NavbarSection() {
           {/* ডেস্কটপ রাইট কন্টেন্ট (মেনু + থিম সুইচ + অথ) */}
           <div className="hidden md:flex items-center gap-6">
             <ul className="flex items-center gap-6">
-              {navItems.map((item) => (
-                <li key={item.label}>
-                  <NextLink
-                    href={item.href}
-                    className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-violet-500 dark:hover:text-violet-400 transition-colors"
-                  >
-                    {item.label}
-                  </NextLink>
-                </li>
-              ))}
+              {navItems.map((item) => {
+                const active = isActive(item.href);
+                return (
+                  <li key={item.label}>
+                    <NextLink
+                      href={item.href}
+                      className={`text-sm font-medium transition-colors duration-200 ${
+                        active
+                          ? "text-violet-600 dark:text-violet-400 font-semibold"
+                          : "text-gray-600 dark:text-gray-300 hover:text-violet-500 dark:hover:text-violet-400"
+                      }`}
+                    >
+                      {item.label}
+                    </NextLink>
+                  </li>
+                );
+              })}
             </ul>
 
             <div className="h-5 w-px bg-gray-200 dark:bg-white/10" />
@@ -138,16 +160,23 @@ export default function NavbarSection() {
           }`}
         >
           <div className="flex flex-col gap-2 px-2 pb-2">
-            {navItems.map((item) => (
-              <NextLink
-                key={item.label}
-                href={item.href}
-                onClick={() => setIsMenuOpen(false)}
-                className="text-base font-medium text-gray-600 dark:text-gray-300 hover:text-violet-500 dark:hover:text-violet-400 py-2.5 px-3 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-900 transition-all"
-              >
-                {item.label}
-              </NextLink>
-            ))}
+            {navItems.map((item) => {
+              const active = isActive(item.href);
+              return (
+                <NextLink
+                  key={item.label}
+                  href={item.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  className={`text-base font-medium py-2.5 px-3 rounded-lg transition-all duration-200 ${
+                    active
+                      ? "text-violet-600 dark:text-violet-400 bg-violet-50/50 dark:bg-violet-500/10 font-semibold"
+                      : "text-gray-600 dark:text-gray-300 hover:text-violet-500 dark:hover:text-violet-400 hover:bg-gray-50 dark:hover:bg-zinc-900"
+                  }`}
+                >
+                  {item.label}
+                </NextLink>
+              );
+            })}
             
             <div className="border-t border-gray-100 dark:border-white/5 pt-4 mt-2">
               {user ? (
