@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Button } from "@heroui/react";
+import { buttonVariants } from "@heroui/styles";
 import { FaArrowRight, FaCalendarAlt, FaUser, FaCheckCircle } from "react-icons/fa";
 import NextLink from "next/link";
 
@@ -119,14 +119,13 @@ export default function AboutAndBlogSection() {
             </div>
 
             <div className="pt-2">
-              <Button
-                as={NextLink}
+              <NextLink
                 href="/about"
-                endContent={<FaArrowRight />}
-                className="bg-violet-600 hover:bg-violet-700 text-white font-semibold py-6 px-8 rounded-xl"
+                className={buttonVariants({ variant: "primary" }) + " bg-violet-600 hover:bg-violet-700 text-white font-semibold py-6 px-8 rounded-xl inline-flex items-center gap-2"}
               >
                 Learn More About Us
-              </Button>
+                <FaArrowRight />
+              </NextLink>
             </div>
           </div>
 
@@ -146,14 +145,12 @@ export default function AboutAndBlogSection() {
                 Latest from EventVibe Blog
               </h2>
             </div>
-            <Button
-              as={NextLink}
+            <NextLink
               href="/blog"
-              variant="bordered"
-              className="border-violet-600/30 dark:border-violet-500/20 text-violet-600 dark:text-violet-400 hover:bg-violet-50 dark:hover:bg-violet-500/10 font-bold py-6 px-6 rounded-xl"
+              className={buttonVariants({ variant: "outline" }) + " border-violet-600/30 dark:border-violet-500/20 text-violet-600 dark:text-violet-400 hover:bg-violet-50 dark:hover:bg-violet-500/10 font-bold py-6 px-6 rounded-xl inline-flex items-center justify-center"}
             >
               See All Posts
-            </Button>
+            </NextLink>
           </div>
 
           {/* ৩ কলাম ব্লগ গ্রিড */}
