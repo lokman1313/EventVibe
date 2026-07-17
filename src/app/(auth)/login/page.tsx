@@ -90,7 +90,7 @@ const SignInClient = () => {
                 name="email"
                 placeholder="Enter your email"
                 required
-                className="bg-gray-100/50 dark:bg-zinc-900/50 border-gray-200 dark:border-white/5 text-gray-950 dark:text-white focus:border-violet-500/50"
+                className="bg-gray-100/50 dark:bg-zinc-900/50 border-gray-200 dark:border-white/5 focus:border-violet-500/50"
               />
             </TextField>
 
