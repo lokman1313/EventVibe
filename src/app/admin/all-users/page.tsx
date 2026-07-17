@@ -1,8 +1,10 @@
 import AllUsersTable from "@/components/admin/AllUserTable";
 import { allUser, User } from "@/lib/api/user";
+import type { JSX } from "react";
 
-const AllUsersPage = async ()=> {
- const allusers: User[] = await allUser() || [];
+const AllUsersPage = async (): Promise<JSX.Element> => {
+
+  const allusers: User[] = await allUser() || [];
 
   return (
     <main className="min-h-screen w-full bg-zinc-50 dark:bg-[#08080a] py-8 px-4 sm:px-6 lg:px-8 transition-colors duration-200">

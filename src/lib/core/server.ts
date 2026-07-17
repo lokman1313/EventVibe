@@ -5,10 +5,9 @@ import { getToken } from "./session"
 // authHeader এর রিটার্ন টাইপ হিসেবে Record<string, string> দেওয়া হয়েছে
 export const authHeader = async (): Promise<Record<string, string>> => {
     const token = await getToken()
-    const header = token ? {
-        authorization: `Bearer ${token}`
-    } : {}
-    return header
+    const headers: Record<string, string> = {};
+    if (token) headers.authorization = `Bearer ${token}`;
+    return headers
 }
 
 const baseurl = process.env.NEXT_PUBLIC_BASE_URL || ""

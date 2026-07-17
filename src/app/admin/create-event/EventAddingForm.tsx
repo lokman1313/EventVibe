@@ -11,21 +11,21 @@ import { FiUploadCloud, FiX } from "react-icons/fi";
 import Image from "next/image";
 import { toast } from "react-toastify";
 import { authClient } from "@/lib/auth-client";
-import { postEventData } from "@/lib/action/event";
+import {  EventInput, postEventData } from "@/lib/action/event";
 
-// TypeScript Interfaces ডিফাইন করা হলো
-interface EventData {
-  title: string;
-  organizer: string;
-  price: number;
-  category: string;
-  location: string;
-  date: string;
-  bannerImage: string;
-  description: string;
-  approvalStatus: "pending" | "approved";
-  publishStatus: "draft" | "published";
-}
+// // TypeScript Interfaces ডিফাইন করা হলো
+// interface EventData {
+//   title: string;
+//   organizer: string;
+//   price: number;
+//   category: string;
+//   location: string;
+//   date: string;
+//   bannerImage: string;
+//   description: string;
+//   approvalStatus: "pending" | "approved";
+//   publishStatus: "unpublished" | "published";
+// }
 
 interface ImgBBResponse {
   success: boolean;
@@ -126,22 +126,22 @@ const EventAddingForm: React.FC = () => {
     const formData = new FormData(form);
     
     // টাইপ সেফ ইভেন্ট ডাটা অবজেক্ট তৈরি
-    const eventData: EventData = {
-      title: formData.get("title") as string,
-      organizer: formData.get("organizer") as string,
-      price: Number(formData.get("price")) || 0,
-      category: formData.get("category") as string,
-      location: formData.get("location") as string,
-      date: formData.get("date") as string,
-      bannerImage: imageUrl || (formData.get("coverImageUrl") as string) || "",
-      description: formData.get("description") as string,
-      approvalStatus: "approved",
-      publishStatus: "published",
-    };
+ const eventInput: EventInput = {
+  title: formData.get("title") as string,
+  organizer: formData.get("organizer") as string,
+  price: Number(formData.get("price")) || 0,
+  category: formData.get("category") as string,
+  location: formData.get("location") as string,
+  date: formData.get("date") as string,
+  bannerImage: imageUrl || (formData.get("coverImageUrl") as string) || "",
+  description: formData.get("description") as string,
+  approvalStatus: "approved",
+  publishStatus: "published",
+};
 
     try {
-      await postEventData(eventData);
-      console.log("Event data to submit:", eventData);
+      await postEventData(eventInput);
+      console.log("Event data to submit:", eventInput);
       toast.success("Event added successfully!");
       form.reset();
       setImagePreview(null);

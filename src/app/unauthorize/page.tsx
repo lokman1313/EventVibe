@@ -2,7 +2,7 @@
 
 import NextLink from "next/link";
 import { Button } from "@heroui/react";
-import { HiShieldCheck } from "react-icons/hi2"; // একটি চমৎকার সিকিউরিটি লক আইকন
+import { HiShieldCheck } from "react-icons/hi2";
 
 export default function UnauthorizedPage() {
   return (
@@ -27,7 +27,7 @@ export default function UnauthorizedPage() {
           </h1>
           
           <p className="mt-4 text-base text-gray-500 dark:text-zinc-400 leading-relaxed">
-            Oops! You don&apos;t have permission to view this page. It seems your current account role is restricted from accessing this route.
+            Oops! You don & apos;t have permission to view this page. It seems your current account role is restricted from accessing this route.
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row w-full gap-3 justify-center">
@@ -41,7 +41,7 @@ export default function UnauthorizedPage() {
             {/* লগআউট/লগইন বাটন */}
             <NextLink href="/login" className="w-full sm:flex-1">
               <Button 
-                variant="bordered"
+                variant="outline"
                 className="w-full h-11 border-gray-200 dark:border-white/10 text-gray-700 dark:text-zinc-300 hover:bg-gray-100 dark:hover:bg-zinc-900 font-semibold rounded-xl transition duration-200"
               >
                 Sign In/Switch Account

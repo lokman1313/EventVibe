@@ -115,7 +115,7 @@ export default function NavbarSection() {
                 onPress={() => authClient.signOut()}
                 className="bg-red-500/10 text-red-500 dark:text-red-400 hover:bg-red-500/20 font-medium"
                 size="sm"
-                variant="flat"
+                variant="ghost"
               >
                 Logout
               </Button>
@@ -182,7 +182,7 @@ export default function NavbarSection() {
                 <Button
                   onPress={() => authClient.signOut()}
                   className="w-full bg-red-500/10 text-red-500 dark:text-red-400 font-medium py-6"
-                  variant="flat"
+                  variant="ghost"
                 >
                   Logout
                 </Button>

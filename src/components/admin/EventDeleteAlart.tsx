@@ -72,16 +72,16 @@ export function EventDeleteAlart({ eventId }: EventDeleteAlartProps) {
             <AlertDialog.Footer className="flex gap-3 justify-center pt-2">
               <Button 
                 slot="close" 
-                variant="bordered"
+                variant="outline"
                 className="border-gray-200 dark:border-white/10 text-gray-700 dark:text-zinc-300 hover:bg-gray-100 dark:hover:bg-zinc-900 font-bold rounded-xl px-5 h-11"
-                disabled={isDeleting}
+                isDisabled={isDeleting}
               >
                 Cancel
               </Button>
               
               <Button 
                 onPress={handleDelete}
-                isLoading={isDeleting}
+                isDisabled={isDeleting}
                 className="bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl px-5 h-11 shadow-lg shadow-red-500/20"
               >
                 {isDeleting ? "Deleting..." : "Delete Event"}

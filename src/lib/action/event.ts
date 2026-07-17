@@ -1,22 +1,27 @@
 import { serverMutation } from "../core/server";
 
-export interface EventData {
+export interface EventInput {
   title: string;
   organizer: string;
   price: number;
   category: string;
   location: string;
+  date: string;
   bannerImage: string;
   description: string;
-  publishStatus: "published" | "unpublished";
-  approvalStatus: "approved" | "pending" | "rejected";
-  date: string;
+  approvalStatus: "pending" | "approved";
+  publishStatus: "unpublished" | "published";
+}
+
+export interface EventData extends EventInput {
+  _id: string;
   creatorId: string;
-  id?: string;
+  time: string;
+  status?: "pending" | "unpublished" | "published";
 }
 
 export const postEventData = async (
-  eventData: EventData
+  eventData: EventInput   // EventData থেকে EventInput করো
 ): Promise<unknown> => {
   return serverMutation("/api/event/post", eventData);
 };

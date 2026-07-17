@@ -8,7 +8,7 @@ interface EventData {
   _id: string;
   title: string;
   organizer: string;
-  price: string;
+  price: number;
   category: string;
   location: string;
   date: string;

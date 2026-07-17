@@ -84,10 +84,9 @@ export default function ComingSoonPage() {
 
               <Button
                 type="submit"
-                endContent={<FaPaperPlane size={12} />}
                 className="h-12 rounded-xl bg-violet-600 px-6 font-semibold text-white hover:bg-violet-700"
               >
-                Notify Me
+                Notify Me<FaPaperPlane size={12} className="ml-2 inline" />
               </Button>
             </form>
           )}

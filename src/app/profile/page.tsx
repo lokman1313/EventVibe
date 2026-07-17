@@ -105,7 +105,7 @@ const ProfilePage = async () => {
                 </NextLink>
 
                 <Button 
-                  variant="bordered"
+                  variant="outline"
                   className="border-gray-200 dark:border-white/10 text-gray-700 dark:text-zinc-300 hover:bg-gray-100 dark:hover:bg-zinc-900 font-semibold rounded-xl px-5 h-10 text-sm flex items-center gap-2"
                 >
                   <HiOutlineCog6Tooth className="text-lg" />

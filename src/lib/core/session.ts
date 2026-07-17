@@ -11,17 +11,23 @@ type User = Awaited<
   ? U
   : never;
 
-// Session type
-type Session = Awaited<
-  ReturnType<typeof auth.api.getSession>
->;
+ type SessionUser = {
+   id: string;
+   createdAt: Date;
+   updatedAt: Date;
+   email: string;
+   emailVerified: boolean;
+   name: string;
+   image?: string | null;
+   role?: string | null;
+ };
 
-export const userSession = async (): Promise<User | null> => {
+export const userSession = async (): Promise<SessionUser | null> => {
  
     const session = await auth.api.getSession({
       headers: await headers(),
     });
-    return session?.user ;
+    return session?.user ?? null;
  
 };
 
@@ -33,7 +39,7 @@ export const getToken = async (): Promise<string | null> => {
   return session?.session?.token ?? null;
 };
 
-export const requireRole = async (role: string): Promise<User> => {
+export const requireRole = async (role: string): Promise<SessionUser> => {
   const user = await userSession();
 
   if (!user) {
