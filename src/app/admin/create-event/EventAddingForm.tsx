@@ -365,8 +365,7 @@ const EventAddingForm: React.FC = () => {
             {/* ── Submit Button ── */}
             <Button
               type="submit"
-              isLoading={isSubmitting}
-              disabled={isUploading || isSubmitting}
+              isDisabled={isUploading || isSubmitting}
               className="w-full h-11 bg-violet-600 hover:bg-violet-700 font-semibold rounded-xl transition duration-200 shadow-lg shadow-violet-600/10 disabled:opacity-50 text-white"
             >
               {isSubmitting ? "Creating Event…" : "Publish Event on EventVibe"}

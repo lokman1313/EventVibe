@@ -3,9 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FiCalendar, FiMapPin, FiUser, FiTag, FiArrowLeft, FiAlertTriangle } from 'react-icons/fi';
 import { Button } from '@heroui/react';
-import React from 'react';
 
-// ইন্টারফেস থেকে time এবং approvalStatus বাদ দেওয়া হয়েছে
 interface EventData {
   _id: string;
   title: string;
