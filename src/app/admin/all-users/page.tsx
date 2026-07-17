@@ -1,9 +1,8 @@
 import AllUsersTable from "@/components/admin/AllUserTable";
 import { allUser, User } from "@/lib/api/user";
 
-const AllUsersPage = async (): Promise<JSX.Element> => {
-  // ১. সার্ভার সাইড থেকে ডাটা ফেচিং (API crash korle fallback faka array)
-  const allusers: User[] = await allUser() || [];
+const AllUsersPage = async ()=> {
+ const allusers: User[] = await allUser() || [];
 
   return (
     <main className="min-h-screen w-full bg-zinc-50 dark:bg-[#08080a] py-8 px-4 sm:px-6 lg:px-8 transition-colors duration-200">
