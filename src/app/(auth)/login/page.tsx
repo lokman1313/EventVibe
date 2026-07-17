@@ -12,7 +12,7 @@ import {
 import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
-import { useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
 const SignInClient = () => {
@@ -64,11 +64,11 @@ const SignInClient = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center px-4 py-10 bg-gray-50 dark:bg-[#0d0d0e] bg-gradient-to-b from-transparent to-gray-100 dark:to-black transition-colors duration-300 overflow-hidden">
       
-      {/* ব্যাকগ্রাউন্ড গ্লোয়িং অর্বস (শুধুমাত্র ডার্ক মোডে গ্লো করবে, লাইট মোডে একদম ক্লিন থাকবে) */}
+      {/* ব্যাকগ্রাউন্ড গ্লোয়িং অর্বস */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 h-[300px] w-[300px] sm:h-[450px] sm:w-[450px] rounded-full bg-violet-500/10 blur-[100px] hidden dark:block" />
       <div className="absolute bottom-10 right-10 -z-10 h-[200px] w-[200px] rounded-full bg-fuchsia-500/5 blur-[80px] hidden dark:block" />
 
-      {/* মেইন কন্টেইনার কার্ড (লাইট মোডে বর্ডার ও ডো এবং ডার্ক মোডে ট্রান্সলুসেন্ট ব্যাকগ্রাউন্ড) */}
+      {/* মেইন কন্টেইনার কার্ড */}
       <div className="w-full max-w-md rounded-2xl border border-gray-200 dark:border-white/10 bg-white/90 dark:bg-[#121214]/80 backdrop-blur-xl shadow-xl dark:shadow-2xl transition-all duration-300 hover:border-violet-500/20 dark:hover:border-violet-500/20">
         <div className="p-8">
           
@@ -82,7 +82,7 @@ const SignInClient = () => {
             </p>
           </div>
 
-          {/* ইমেইল ও পাসওয়ার্ড ফর্ম */}
+          {/* ইমেইল ও পাসওয়ার্ড ফর্ম */}
           <form onSubmit={handelSubmit} className="space-y-5">
             <TextField className="w-full text-gray-900 dark:text-white" name="email" type="email">
               <Label className="text-gray-700 dark:text-zinc-300 font-medium mb-1.5 block text-sm">Email</Label>
@@ -133,12 +133,13 @@ const SignInClient = () => {
               </Link>
             </div>
        
+            {/* সাবমিট বাটন (isLoading prop kete dynamic validation kora hoyeche) */}
             <Button
               type="submit"
-              isLoading={isLoading}
-              className="w-full h-11 bg-violet-600 hover:bg-violet-700 text-white font-semibold rounded-xl transition duration-200 shadow-lg shadow-violet-500/10 active:scale-[0.98]"
+              disabled={isLoading}
+              className="w-full h-11 bg-violet-600 hover:bg-violet-700 text-white font-semibold rounded-xl transition duration-200 shadow-lg shadow-violet-500/10 active:scale-[0.98] disabled:opacity-50"
             >
-              Sign In
+              {isLoading ? "Signing In..." : "Sign In"}
             </Button>
           </form>
       
@@ -149,14 +150,20 @@ const SignInClient = () => {
             <Separator className="flex-1 bg-gray-200 dark:bg-white/10" />
           </div>
   
-          {/* গুগল লগইন */}
+          {/* গুগল লগইন (Ekhane o custom binding logic fix kora hoyeche) */}
           <Button
             onPress={handelSignIn}
-            isLoading={isGoogleLoading}
-            className="w-full h-11 bg-white dark:bg-zinc-900 hover:bg-gray-50 dark:hover:bg-zinc-800 text-gray-900 dark:text-white border border-gray-200 dark:border-white/10 font-medium rounded-xl transition duration-200 flex items-center justify-center gap-2 group"
+            disabled={isGoogleLoading}
+            className="w-full h-11 bg-white dark:bg-zinc-900 hover:bg-gray-50 dark:hover:bg-zinc-800 text-gray-900 dark:text-white border border-gray-200 dark:border-white/10 font-medium rounded-xl transition duration-200 flex items-center justify-center gap-2 group disabled:opacity-50"
           >
-            {!isGoogleLoading && <FaGoogle className="text-md text-violet-600 dark:text-violet-400 group-hover:scale-105 transition-transform" />}
-            Sign in with Google
+            {isGoogleLoading ? (
+              "Connecting..."
+            ) : (
+              <>
+                <FaGoogle className="text-md text-violet-600 dark:text-violet-400 group-hover:scale-105 transition-transform" />
+                Sign in with Google
+              </>
+            )}
           </Button>
 
           {/* সাইনআপ রিডাইরেক্ট */}

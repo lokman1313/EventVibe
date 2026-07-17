@@ -9,7 +9,7 @@ import {
   InputGroup,
   Separator,
 } from "@heroui/react";
-import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaGoogle, FaSpinner } from "react-icons/fa";
 import { FiUploadCloud as CloudIcon, FiX as CloseIcon } from "react-icons/fi";
 import Link from "next/link";
 import Image from "next/image";
@@ -142,14 +142,14 @@ const SignUp = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center px-4 py-10 bg-gray-50 dark:bg-[#0d0d0e] bg-gradient-to-b from-transparent to-gray-100 dark:to-black transition-colors duration-300 overflow-hidden">
-    
+
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 h-[300px] w-[300px] sm:h-[450px] sm:w-[450px] rounded-full bg-violet-500/10 blur-[100px] hidden dark:block" />
       <div className="absolute bottom-10 right-10 -z-10 h-[200px] w-[200px] rounded-full bg-fuchsia-500/5 blur-[80px] hidden dark:block" />
 
       {/* মেইন কন্টেইনার কার্ড */}
       <div className="w-full max-w-md rounded-2xl border border-gray-200 dark:border-white/10 bg-white/90 dark:bg-[#121214]/80 backdrop-blur-xl shadow-xl dark:shadow-2xl transition-all duration-300 hover:border-violet-500/20 dark:hover:border-violet-500/20">
         <div className="p-8">
-          
+
           {/* হেডার */}
           <div className="mb-8 text-center">
             <h1 className="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">
@@ -162,7 +162,7 @@ const SignUp = () => {
 
           {/* রেজিস্ট্রেশন ফর্ম */}
           <form onSubmit={handleSubmit} className="space-y-5">
-            
+
             {/* নাম ইনপুট */}
             <TextField className="w-full text-gray-900 dark:text-white">
               <Label className="text-gray-700 dark:text-zinc-300 font-medium mb-1.5 block text-sm">
@@ -242,7 +242,7 @@ const SignUp = () => {
               )}
             </TextField>
 
-            {/* পাসওয়ার্ড */}
+            {/* পাসওয়ার্ড */}
             <TextField className="w-full text-gray-900 dark:text-white">
               <Label className="text-gray-700 dark:text-zinc-300 font-medium mb-1.5 block text-sm">
                 Password
@@ -275,7 +275,7 @@ const SignUp = () => {
               </InputGroup>
             </TextField>
 
-            {/* কনফার্ম পাসওয়ার্ড */}
+            {/* কনফার্ম পাসওয়ার্ড */}
             <TextField className="w-full text-gray-900 dark:text-white">
               <Label className="text-gray-700 dark:text-zinc-300 font-medium mb-1.5 block text-sm">
                 Confirm Password
@@ -311,11 +311,17 @@ const SignUp = () => {
             {/* সাবমিট বাটন */}
             <Button
               type="submit"
-              isLoading={loading}
-              disabled={isUploading}
-              className="w-full h-11 bg-violet-600 hover:bg-violet-700 text-white font-semibold rounded-xl transition duration-200 shadow-lg shadow-violet-500/10 mt-2 disabled:opacity-50 active:scale-[0.98]"
+              disabled={loading || isUploading}
+              className="w-full h-11 bg-violet-600 hover:bg-violet-700 text-white font-semibold rounded-xl transition duration-200 shadow-lg shadow-violet-500/10 mt-2 disabled:opacity-50 active:scale-[0.98] flex items-center justify-center gap-2"
             >
-              Create Account
+              {loading ? (
+                <>
+                  <FaSpinner className="size-4 animate-spin" />
+                  Creating Account...
+                </>
+              ) : (
+                "Create Account"
+              )}
             </Button>
           </form>
 
@@ -331,13 +337,20 @@ const SignUp = () => {
           {/* গুগল সাইন আপ */}
           <Button
             onPress={handleGoogleSignUp}
-            isLoading={googleLoading}
-            className="w-full h-11 bg-white dark:bg-zinc-900 hover:bg-gray-50 dark:hover:bg-zinc-800 text-gray-900 dark:text-white border border-gray-200 dark:border-white/10 font-medium rounded-xl transition duration-200 flex items-center justify-center gap-2 group"
+            disabled={googleLoading}
+            className="w-full h-11 bg-white dark:bg-zinc-900 hover:bg-gray-50 dark:hover:bg-zinc-800 text-gray-900 dark:text-white border border-gray-200 dark:border-white/10 font-medium rounded-xl transition duration-200 flex items-center justify-center gap-2 group disabled:opacity-50"
           >
-            {!googleLoading && (
-              <FaGoogle className="text-md text-violet-600 dark:text-violet-400 group-hover:scale-105 transition-transform" />
+            {googleLoading ? (
+              <>
+                <FaSpinner className="size-4 animate-spin text-violet-600 dark:text-violet-400" />
+                Connecting...
+              </>
+            ) : (
+              <>
+                <FaGoogle className="text-md text-violet-600 dark:text-violet-400 group-hover:scale-105 transition-transform" />
+                Continue with Google
+              </>
             )}
-            Continue with Google
           </Button>
 
           {/* ফুটার */}
