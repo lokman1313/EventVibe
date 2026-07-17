@@ -89,33 +89,13 @@ event-vibe/
    npm install
    ```
 
-3. **Set up environment variables**
-
-   Create a `.env.local` file in the project root:
-
-   ```env
-   # Database
-   MONGODB_URI=your_mongodb_connection_string
-   DB_NAME=your_database_name
-
-   # Better Auth
-   BETTER_AUTH_URL=http://localhost:3000
-
-   # Google OAuth
-   GOOGLE_CLIENT_ID=your_google_client_id
-   GOOGLE_CLIENT_SECRET=your_google_client_secret
-
-   # ImgBB Image Upload
-   NEXT_PUBLIC_IMAGE_BB_UPLOAD_API=your_imgbb_api_key
-   ```
-
-4. **Run the development server**
+3. **Run the development server**
 
    ```bash
    npm run dev
    ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
