@@ -37,7 +37,6 @@ export default function NavbarSection() {
         { label: "Manage Events", href: "/admin/events" },
         { label: "Create Event", href: "/admin/create-event" },
         { label: "Users", href: "/admin/all-users" },
-        { label: "Analytics", href: "/admin/analytics" },
         { label: "Profile", href: "/profile" },
       ];
     }

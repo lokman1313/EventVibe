@@ -12,13 +12,10 @@ import {
 import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter} from "next/navigation";
 import { toast } from "react-toastify";
 
 const SignInClient = () => {
-  const searchParams = useSearchParams();
-  const redirectPath = searchParams.get("redirect") || "/";
-
   const router = useRouter();
   const [isVisible, setIsVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -28,7 +25,7 @@ const SignInClient = () => {
     setIsGoogleLoading(true);
     const { error } = await authClient.signIn.social({
       provider: "google",
-      callbackURL: redirectPath,
+      callbackURL: "/",
     });
 
     if (error) {
@@ -60,7 +57,7 @@ const SignInClient = () => {
 
     if (data) {
       toast.success("Welcome back to the vibe!");
-      router.push(redirectPath);
+      router.push("/");
     }
   };
 
@@ -105,7 +102,7 @@ const SignInClient = () => {
                   type={isVisible ? "text" : "password"}
                   placeholder="Enter your password"
                   required
-                  className="text-gray-950 dark:text-white placeholder:text-gray-400 dark:placeholder:text-zinc-500 bg-transparent"
+                  className=" placeholder:text-gray-400 dark:placeholder:text-zinc-500 bg-transparent"
                 />
                 <InputGroup.Suffix>
                   <Button
@@ -166,7 +163,7 @@ const SignInClient = () => {
           <p className="text-center text-sm text-gray-500 dark:text-zinc-400 mt-6">
             Don't have an account?{" "}
             <Link
-              href={`/signup?redirect=${redirectPath}`}
+              href={`/signup`}
               className="text-violet-600 dark:text-violet-400 font-semibold hover:underline"
             >
               Sign Up

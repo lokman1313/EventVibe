@@ -85,9 +85,8 @@ export default function HeroLoadingSection() {
             <div className="h-12 w-12 rounded-xl bg-violet-100 dark:bg-violet-900/20 text-violet-600 dark:text-violet-400 flex items-center justify-center mb-3.5">
               <HiCalendarDays className="h-6 w-6" />
             </div>
-            <h3 className="text-sm font-bold text-gray-900 dark:text-white">Music Festival 2026</h3>
-            <p className="text-xs text-violet-600 dark:text-violet-400 font-medium mt-1">Live in Dhaka</p>
-            
+            <h3 className="text-sm font-bold text-gray-900 dark:text-white">Festival</h3>
+           
             {/* Infinite loading bar */}
             <div className="w-full mt-4 h-1 rounded-full bg-gray-100 dark:bg-white/10 overflow-hidden">
               <motion.div 

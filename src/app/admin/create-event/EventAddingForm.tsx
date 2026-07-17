@@ -21,10 +21,8 @@ interface EventData {
   category: string;
   location: string;
   date: string;
-  time: string;
   bannerImage: string;
   description: string;
-  creatorId: string | undefined;
   approvalStatus: "pending" | "approved";
   publishStatus: "draft" | "published";
 }
@@ -135,11 +133,9 @@ const EventAddingForm: React.FC = () => {
       category: formData.get("category") as string,
       location: formData.get("location") as string,
       date: formData.get("date") as string,
-      time: formData.get("time") as string,
       bannerImage: imageUrl || (formData.get("coverImageUrl") as string) || "",
       description: formData.get("description") as string,
-      creatorId: user.id,
-      approvalStatus: "pending",
+      approvalStatus: "approved",
       publishStatus: "published",
     };
 
