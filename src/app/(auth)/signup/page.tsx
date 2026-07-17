@@ -258,7 +258,7 @@ const SignUp = () => {
                 <InputGroup.Suffix>
                   <Button
                     isIconOnly
-                    variant="light"
+                    variant="ghost"
                     size="sm"
                     type="button"
                     className="text-gray-400 dark:text-zinc-400 hover:text-gray-950 dark:hover:text-white"
@@ -291,7 +291,7 @@ const SignUp = () => {
                 <InputGroup.Suffix>
                   <Button
                     isIconOnly
-                    variant="light"
+                    variant="ghost"
                     size="sm"
                     type="button"
                     className="text-gray-400 dark:text-zinc-400 hover:text-gray-950 dark:hover:text-white"
