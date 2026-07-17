@@ -311,7 +311,7 @@ const SignUp = () => {
             {/* সাবমিট বাটন */}
             <Button
               type="submit"
-              disabled={loading || isUploading}
+              isDisabled={loading || isUploading}
               className="w-full h-11 bg-violet-600 hover:bg-violet-700 text-white font-semibold rounded-xl transition duration-200 shadow-lg shadow-violet-500/10 mt-2 disabled:opacity-50 active:scale-[0.98] flex items-center justify-center gap-2"
             >
               {loading ? (
@@ -337,7 +337,7 @@ const SignUp = () => {
           {/* গুগল সাইন আপ */}
           <Button
             onPress={handleGoogleSignUp}
-            disabled={googleLoading}
+            isDisabled={googleLoading}
             className="w-full h-11 bg-white dark:bg-zinc-900 hover:bg-gray-50 dark:hover:bg-zinc-800 text-gray-900 dark:text-white border border-gray-200 dark:border-white/10 font-medium rounded-xl transition duration-200 flex items-center justify-center gap-2 group disabled:opacity-50"
           >
             {googleLoading ? (
